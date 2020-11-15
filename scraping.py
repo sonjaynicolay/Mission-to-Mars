@@ -52,7 +52,7 @@ def mars_news(browser):
     return news_title, news_p
 
 # ### Featured Images
-def featured_image(browser)
+def featured_image(browser):
     # Visit URL
     url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(url)
@@ -89,6 +89,7 @@ def mars_facts():
         df = pd.read_html('http://space-facts.com/mars/')[0]
 
     except BaseException:
+        print("Mars Facts Failed")
         return None
 
     # Assign columns and set index of dataframe
@@ -96,7 +97,7 @@ def mars_facts():
     df.set_index('Description', inplace=True)
 
     # Convert dataframe into HTML format, add bootstrap
-    return df.to_html()
+    return df.to_html(classes="table table-striped")
 
 if __name__ == "__main__":
     # If running as script, print scraped data
